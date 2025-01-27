@@ -1,0 +1,249 @@
+2. echo $HOME
+OUTPUT /root
+
+basename $HOME
+
+3. echo $USER
+
+4. ls -a
+OUTPUT 
+.                .bash_logout   .config    Downloads  Pictures  Templates
+..               .bash_profile  .cshrc     .lesshst   Public    Videos
+anaconda-ks.cfg  .bashrc        Desktop    .local     .ssh      .viminfo
+.bash_history    .cache         Documents  Music      .tcshrc   .xauthszuVde
+
+5. ls ~
+
+6. ls -l
+OUTPUT
+total 4
+-rw-------. 1 root root 828 Aug 25  2022 anaconda-ks.cfg
+drwxr-xr-x. 2 root root   6 Aug 25  2022 Desktop
+drwxr-xr-x. 2 root root   6 Aug 25  2022 Documents
+drwxr-xr-x. 2 root root   6 Aug 25  2022 Downloads
+drwxr-xr-x. 2 root root   6 Aug 25  2022 Music
+drwxr-xr-x. 2 root root   6 Aug 25  2022 Pictures
+drwxr-xr-x. 2 root root   6 Aug 25  2022 Public
+drwxr-xr-x. 2 root root   6 Aug 25  2022 Templates
+drwxr-xr-x. 2 root root   6 Aug 25  2022 Videos
+
+7. ls chap[a-z0-9]*
+OUTPUT ls: cannot access 'chap[a-z0-9]*': No such file or directory
+8. mkdir ~/C_prog
+9. mkdir ~/newdir
+   mkdir ~/newdirectory
+10. ls -R 
+OUTPUT .:
+anaconda-ks.cfg  Desktop    Downloads  newdir        Pictures  Templates
+C_prog           Documents  Music      newdirectory  Public    Videos
+
+./C_prog:
+
+./Desktop:
+
+./Documents:
+
+./Downloads:
+
+./Music:
+
+./newdir:
+
+./newdirectory:
+
+./Pictures:
+
+./Public:
+
+./Templates:
+
+./Videos:
+
+11. rm -r newdirectory
+OUTPUT
+m: remove directory 'newdirectory'? y
+[root@hostname01 ~]# ls
+anaconda-ks.cfg  Desktop    Downloads  newdir    Public     Videos
+C_prog           Documents  Music      Pictures  Templates
+
+12. mkdir ~/temp
+
+13. rm -r newdir
+OUTPUT
+rm: remove directory 'newdir'? y
+[root@hostname01 ~]# ls
+anaconda-ks.cfg  Desktop    Downloads  Pictures  temp       Videos
+C_prog           Documents  Music      Public    Templates
+
+14. mkdir ~/temp/directorynew
+
+15. cd ~
+
+16. cd /root/temp/directorynew
+    cd temp/directorynew
+
+17. rm -r /root/cprog
+
+18. cd /etc
+    ls
+19. ls -d /usr/bin/.*
+
+20. touch first.unix
+    echo "Hi! Good morning everybody" > first.unix
+    echo "welcome to the first exercise on unix" >> first.unix
+    echo "hope you enjoy doing the assignments" >> first.unix
+
+21. cp first.unix ~/
+    cp first.unix ~/first.unics
+
+22. cat first.unix first.unics
+Hi! Good morning everybody
+welcome to the first exercise on unix
+hope you enjoy doing the assignments
+Hi! Good morning everybody
+welcome to the first exercise on unix
+hope you enjoy doing the assignments
+
+23. mkdir ~/temp/new_directory
+
+24. cp -t ~/temp/new_directory/ ~/.* ~/*
+
+25. mv ~/first.unix ~/temp/second.unix
+
+26. rm ~/first.unics
+
+27. cd ~/temp
+rm *
+rm: cannot remove 'directorynew': Is a directory
+rm: cannot remove 'new_directory': Is a directory
+rm: remove regular file 'second.unix'? n
+
+28. mv ~/temp/*.a ~/temp/*.c ~/temp/*.o ~/
+
+29. cp ~/*unix ~/temp
+
+30. rm -rf ~/temp
+
+31. cp ~/temp1
+cp: missing destination file operand after '/root/temp1'
+Try 'cp --help' for more information.
+
+mv ~/temp1 
+mv: missing destination file operand after '/root/temp1'
+
+32. cat > friends.txt
+Madhu 6966456 09/07/68
+cat >> friends.txt
+Jamil 2345215 08/09/67
+Ajay 5546785 01/04/66
+Mano 7820022 09/07/68
+David 8281292 09/09/60
+Simmi 7864563 12/12/70
+Navin 2224311 30/05/68
+
+33. cat friends.txt
+Madhu 6966456 09/07/68
+Jamil 2345215 08/09/67
+Ajay 5546785 01/04/66
+Mano 7820022 09/07/68
+David 8281292 09/09/60
+Simmi 7864563 12/12/70
+Navin 2224311 30/05/68
+
+34. cat friends.txt > newfriend.txt
+
+35. cat friends.txt newfriend.txt
+Madhu 6966456 09/07/68
+Jamil 2345215 08/09/67
+Ajay 5546785 01/04/66
+Mano 7820022 09/07/68
+David 8281292 09/09/60
+Simmi 7864563 12/12/70
+Navin 2224311 30/05/68
+Madhu 6966456 09/07/68
+Jamil 2345215 08/09/67
+Ajay 5546785 01/04/66
+Mano 7820022 09/07/68
+David 8281292 09/09/60
+Simmi 7864563 12/12/70
+Navin 2224311 30/05/68
+
+36. who > users
+cat users
+admin    seat0        2025-01-27 12:27 (login screen)
+admin    tty2         2025-01-27 12:27 (tty2)
+
+37. cat friends.txt >> users
+    cat users
+admin    seat0        2025-01-27 12:27 (login screen)
+admin    tty2         2025-01-27 12:27 (tty2)
+Madhu 6966456 09/07/68
+Jamil 2345215 08/09/67
+Ajay 5546785 01/04/66
+Mano 7820022 09/07/68
+David 8281292 09/09/60
+Simmi 7864563 12/12/70
+Navin 2224311 30/05/68
+
+38. date
+Mon Jan 27 10:34:17 PM IST 2025
+time is in hours:minutes:seconds
+
+39. cal 10 2002
+    OUTPUT
+    October 2002    
+Su Mo Tu We Th Fr Sa
+       1  2  3  4  5
+ 6  7  8  9 10 11 12
+13 14 15 16 17 18 19
+20 21 22 23 24 25 26
+27 28 29 30 31 
+  
+40. date "+%"
+%
+
+date "+%m"
+01
+
+date "+%D"
+01/27/25
+
+"+%/%Training Activity"
+%/22:38:40raining Activity
+
+"+%Training Activity"
+22:39:04raining Activity
+
+date "+%r"
+10:39:24 PM
+
+USING PIPES AND FILTERS
+1. ls --help > lsdoc
+
+2. cat lsdoc | less
+
+3. cat > data.txt
+hello
+
+4. cat data.txt
+hello
+
+5. rm data.txt
+rm: remove regular file 'data.txt'? y
+[root@hostname01 ~]# cat data.txt
+cat: data.txt: No such file or directory
+
+6. cat data.txt 2> errorlog.txt
+
+7. cat errorlog.txt
+cat: data.txt: No such file or directory
+
+
+
+
+   
+
+
+
+
+
