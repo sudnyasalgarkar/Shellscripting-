@@ -1,0 +1,329 @@
+=====WORKING WITH VI EDITOR=====
+1. vi netware.txt 
+A network is a group of computers that can communicate with each oher,share
+resources, and access remote hosts or other networks.Netware is a computer network
+operating system designed to connect, manage, and maintain a network and its
+services. Some of the network services are Netware Directory Services(NDS), file
+system, printing and security.
+
+a. :2s/Netware/Novell Netware
+OUTPUT
+A network is a group of computers that can communicate with each oher,share
+resources, and access remote hosts or other networks.Novell Netware is a computer network
+operating system designed to connect, manage, and maintain a network and its
+services. Some of the network services are Netware Directory Services(NDS), file
+system, printing and security.
+b. :/share resources
+c. A network is a group of computers that can communicate with each oher,share
+resources such as hard disks and printers, and access remote hosts or other networks.Novell Netware is a computer network
+operating system designed to connect, manage, and maintain a network and its
+services. Some of the network services are Netware Directory Services(NDS), file
+system, printing and security.
+Managing NDS is a fundamental administrator role because NDS provides a single
+point for accessing and managing most network resources.
+
+=====WORKING SHELL=====
+
+1. text - Hello World
+
+1:one word back - alt+B
+2:one word forward - alt+F
+3:to the first character - ctrl+A
+4:to the end - ctrl+E
+5:delete from second word to last character - alt+B and then ctrl+K
+6:delete current line - ctrl+U
+
+2. Use 'tab' for command completion
+cat error (press tab)
+cat errorlog
+
+3. history
+OUTPUT
+[root@hostname01 ~]# history
+    1  hostnamectl host01
+    2  hostname host01
+    3  yum -y update
+    4  init 0
+    5  hostnamectl set-hostname hostname01
+    6  hostnamectl
+    7  ipconfig
+    8  ifconfig
+    9  clear
+   10  yum update -y
+   11  uname -a
+   12  hostnamectl
+   13  cat /etc/os-release 
+   14  yum update -y
+   15  init 6
+   16  init 0
+   17  df  -kh
+   18  init 0
+   19  su - sudnya
+   20  ip a
+   21  aprops ip | grep (8)
+   22  hostnamectl
+   23  aprops hostname
+   24  aprops ip | grep "8"
+   25  ip aip a
+   26  ip a
+   27  aprops ip
+   28  ip address | frep inet
+   29  ip address | grep inet
+   30  useradd sudnya
+   31  su - sudnya
+   32  vim sum.sh
+   33  vim students.txt
+   34  rm students.txt
+   35  vim updatestudents.sh
+   36  rm updatestudents.sh
+   37  vim students.txt
+   38  ./students.txt
+   39  chmod +x students.txt
+   40  ./students.txt
+   41  vim update.sh
+   42  ./update.sh students.txt
+   43  chmod +x update.sh
+   44  ./update.sh students.txt
+   45  vim students.txt
+   46  vim update.sh
+   47  ./update.sh students.txt
+   48  vim update.sh
+   49  ./update.sh students.txt
+   50  vim update.sh
+   51  ./update.sh students.txt
+   52  ./update.sh 
+   53  vim update.sh
+   54  ./update.sh 
+   55  ./update.sh students.txt
+   56  vim update.sh
+   57  ./students.txt
+   58  man vi
+   59  vim network.txt
+   60  man vi
+   61  vi netware.txt
+   62  vim network.txt
+   63  vi netware.txt
+   64  man shell
+   65  hello world
+   66  cd
+   67  hello world d2w$ 
+   68  cat errorlog
+   69  cat errorlog.txt
+   70  cat errorlog 
+   71  cat errorlog
+   72  history
+
+4. history | grep ls
+OUTPUT
+[root@hostname01 ~]# history | grep ls
+   73  history | grep ls
+
+5. [root@hostname01 ~]# !!
+OUTPUT
+history | grep ls
+   73  history | grep ls
+
+
+6. !3  (executing the 3rd command)
+[root@hostname01 ~]# !3
+yum -y update
+Last metadata expiration check: 1:34:19 ago on Thu 30 Jan 2025 04:33:57 PM IST.
+Dependencies resolved.
+=====================   .......
+
+7. 
+[root@hostname01 ~]# cat /etc/shells
+OUTPUT
+/bin/sh
+/bin/bash
+/usr/bin/sh
+/usr/bin/bash
+
+
+=====UNDERSTANDING ACCESS PERMISSIONS=====
+
+7.1.  
+[root@hostname01 ~]# cat demofile
+[root@hostname01 ~]# vi demofile
+[root@hostname01 ~]# touch demofile
+
+1. [root@hostname01 ~]# chmod u-r demofile
+[root@hostname01 ~]# ls -l demofile
+--w-r--r--. 1 root root 0 Jan 30 18:30 demofile
+
+2. [root@hostname01 ~]# chmod u-w demofile
+[root@hostname01 ~]# ls -l demofile
+----r--r--. 1 root root 0 Jan 30 18:30 demofile
+
+3. [root@hostname01 ~]# chmod u+rw demofile
+[root@hostname01 ~]# ls -l demofile
+-rw-r--r--. 1 root root 0 Jan 30 18:30 demofile
+
+4. [root@hostname01 ~]# chmod go-wx demofile
+[root@hostname01 ~]# ls -l demofile
+-rw-r--r--. 1 root root 0 Jan 30 18:30 demofile
+
+5. [root@hostname01 ~]# chmod g+w demofile
+[root@hostname01 ~]# ls -l demofile
+-rw-rw-r--. 1 root root 0 Jan 30 18:30 demofile
+
+6. [root@hostname01 ~]# chmod a+r demofile
+[root@hostname01 ~]# ls -l demofile
+-rw-rw-r--. 1 root root 0 Jan 30 18:30 demofile
+
+7. [root@hostname01 ~]# chmod o-r demofile
+[root@hostname01 ~]# ls -l demofile
+-rw-rw----. 1 root root 0 Jan 30 18:30 demofile
+
+8. [root@hostname01 ~]# chmod u+x chap1
+chmod: cannot access 'chap1': No such file or directory
+[root@hostname01 ~]# touch chap1
+[root@hostname01 ~]# chmod u+x chap1
+[root@hostname01 ~]# ls -l chap1
+-rwxr--r--. 1 root root 0 Jan 30 18:37 chap1
+
+9. [root@hostname01 ~]# touch add.c
+[root@hostname01 ~]# chmod u+x,g+x,o+x add.c
+[root@hostname01 ~]# ls -l add.c
+-rwxr-xr-x. 1 root root 0 Jan 30 18:38 add.c
+
+10. [root@hostname01 ~]# touch aa.c
+[root@hostname01 ~]# chmod u-x,go+r aa.c
+[root@hostname01 ~]# ls -l aa.c
+-rw-r--r--. 1 root root 0 Jan 30 18:38 aa.c
+
+11. [root@hostname01 ~]# touch a.c kk.c nato
+[root@hostname01 ~]# touch myfile
+[root@hostname01 ~]# chmod u+x a.c kk.c nato myfile
+[root@hostname01 ~]# ls -l a.c kk.c nato myfile
+-rwxr--r--. 1 root root 0 Jan 30 18:40 a.c
+-rwxr--r--. 1 root root 0 Jan 30 18:40 kk.c
+-rwxr--r--. 1 root root 0 Jan 30 18:40 myfile
+-rwxr--r--. 1 root root 0 Jan 30 18:40 nato
+
+7.2 [sudnya@hostname01 ~]$ mkdir demo
+[sudnya@hostname01 ~]$ cp /etc/passwd demo/
+
+1. [sudnya@hostname01 ~]$ ls demo
+passwd
+
+2.[sudnya@hostname01 ~]$ chmod -r demo
+[sudnya@hostname01 ~]$ ls demo
+ls: cannot open directory 'demo': Permission denied
+
+3. [sudnya@hostname01 ~]$ chmod -w demo
+[sudnya@hostname01 ~]$ cp /etc/profile demo/
+cp: cannot create regular file 'demo/profile': Permission denied
+
+4. [sudnya@hostname01 ~]$ rm demo/passwd
+rm: cannot remove 'demo/passwd': Permission denied
+
+5. [sudnya@hostname01 ~]$ chmod -x demo
+[sudnya@hostname01 ~]$ cd demo
+-bash: cd: demo: Permission denied
+
+=====USING PROCESS RELATED COMMANDS=====
+
+1. [root@hostname01 ~]# ps
+    PID TTY          TIME CMD
+  15641 pts/3    00:00:00 su
+  15652 pts/3    00:00:00 bash
+  15681 pts/3    00:00:00 ps
+
+2. ps aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.2 173760 16660 ?        Ss   Jan27   0:10 /usr/lib/syst
+root           2  0.0  0.0      0     0 ?        S    Jan27   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        S    Jan27   0:00 [pool_workque
+root           4  0.0  0.0      0     0 ?        I<   Jan27   0:00 [kworker/R-rc
+root           5  0.0  0.0      0     0 ?        I<   Jan27   0:00 [kworker/R-sy
+root           6  0.0  0.0      0     0 ?        I<   Jan27   0:00 [kworker/R-sl
+root           7  0.0  0.0      0     0 ?        I<   Jan27   0:00 [kworker/R-ne
+root          10  0.0  0.0      0     0 ?        I    Jan27   0:00 [kworker/u512
+root          11  0.0  0.0      0     0 ?        I<   Jan27   0:00 [kworker/R-mm
+root          12  0.0  0.0      0     0 ?        I    Jan27   0:00 [kworker/u512
+root          13  0.0  0.0      0     0 ?        I    Jan27   0:00 [rcu_tasks_kt
+root          14  0.0  0.0      0     0 ?        I    Jan27   0:00 [rcu_tasks_ru
+root          15  0.0  0.0      0     0 ?        I    Jan27   0:00 [rcu_tasks_tr
+root          16  0.0  0.0      0     0 ?        S    Jan27   0:00 [ksoftirqd/0]
+root          17  0.0  0.0      0     0 ?        I    Jan27   0:05 [rcu_preempt]
+root          18  0.0  0.0      0     0 ?        S    Jan27   0:00 [rcu_exp_par_
+root          19  0.0  0.0      0     0 ?        S    Jan27   0:00 [rcu_exp_gp_k
+root          20  0.0  0.0      0     0 ?        S    Jan27   0:00 [migration/0]
+root          21  0.0  0.0      0     0 ?        S    Jan27   0:00 [idle_inject/
+root          23  0.0  0.0      0     0 ?        S    Jan27   0:00 [cpuhp/0]
+root          24  0.0  0.0      0     0 ?        S    Jan27   0:00 [cpuhp/1]
+root          25  0.0  0.0      0     0 ?        S    Jan27   0:00 [idle_inject/
+root          26  0.0  0.0      0     0 ?        S    Jan27   0:02 [migration/1]
+root          27  0.0  0.0      0     0 ?        S    Jan27   0:00 [ksoftirqd/1]
+root          29  0.0  0.0      0     0 ?        I<   Jan27   0:00 [kworker/1:0H
+root          30  0.0  0.0      0     0 ?        S    Jan27   0:00 [cpuhp/2]
+root          31  0.0  0.0      0     0 ?        S    Jan27   0:00 [idle_inject/
+root          32  0.0  0.0      0     0 ?        S    Jan27   0:02 [migration/2]
+root          33  0.0  0.0      0     0 ?        S    Jan27   0:00 [ksoftirqd/2]
+root          36  0.0  0.0      0     0 ?        S    Jan27   0:00 [cpuhp/3]
+root          37  0.0  0.0      0     0 ?        S    Jan27   0:00 [idle_inject/
+root          38  0.0  0.0      0     0 ?        S    Jan27   0:02 [migration/3]
+root          39  0.0  0.0      0     0 ?        S    Jan27   0:00 [ksoftirqd/3]
+
+3. [root@hostname01 ~]# sleep 30 &
+[1] 15699
+[root@hostname01 ~]# ps -p 15699
+    PID TTY          TIME CMD
+  15699 pts/3    00:00:00 sleep
+
+4. [root@hostname01 ~]# sleep 40 &
+[3] 15702
+
+5. [root@hostname01 ~]# fg
+sleep 40
+
+6. [root@hostname01 ~]# sleep 100 &
+[1] 16115
+[root@hostname01 ~]# sleep 500 &
+[2] 16116
+[root@hostname01 ~]# sleep 400 &
+[3] 16117
+[root@hostname01 ~]# fg %1
+sleep 100
+
+7. ctrl+Z (stop the current job)
+
+8. [root@hostname01 ~]# sleep 400 &
+[1] 16211
+[root@hostname01 ~]# fg
+sleep 400
+^Z
+[1]+  Stopped                 sleep 400
+
+[root@hostname01 ~]# fg %1        ------> STOPPED JOB STARTED
+sleep 400
+
+9. [root@hostname01 ~]# sleep 50 
+
+10. [root@hostname01 ~]# sleep 50 
+kill %1
+[root@hostname01 ~]# kill %1
+[root@hostname01 ~]#              
+ 
+11. [root@hostname01 ~]# echo $$
+15652
+[root@hostname01 ~]# kill -9 15652
+Killed
+
+12. nice -n -10 ls
+
+13. crontab -e
+0 * * * * date
+
+
+
+
+
+
+
+
+
+
+
+
