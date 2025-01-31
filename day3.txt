@@ -1,0 +1,957 @@
+=====UNIX FILE SYSTEM AND PERMISSIONS=====
+
+1. [root@hostname01 ~]# chmod u+x chap1
+[root@hostname01 ~]# ls -l chap1
+-rwxr--r--. 1 root root 0 Jan 30 18:37 chap1
+
+2. [root@hostname01 ~]# chmod u+x,g+x,o+x add.c
+[root@hostname01 ~]# ls -l add.c
+-rwxr-xr-x. 1 root root 0 Jan 30 18:38 add.c
+
+3. [root@hostname01 ~]# chmod u-x,go+r aa.c
+[root@hostname01 ~]# ls -l aa.c
+-rw-r--r--. 1 root root 0 Jan 30 18:38 aa.c
+
+4. [root@hostname01 ~]# chmod u+x a.c kk.c nato myfile
+[root@hostname01 ~]# ls -l a.c kk.c nato myfile
+-rwxr--r--. 1 root root 0 Jan 30 18:40 a.c
+-rwxr--r--. 1 root root 0 Jan 30 18:40 kk.c
+-rwxr--r--. 1 root root 0 Jan 30 18:40 myfile
+-rwxr--r--. 1 root root 0 Jan 30 18:40 nato
+
+5. [root@hostname01 ~]# cd /
+[root@hostname01 /]# ls
+afs  boot  etc   lib    media  opt   root  sbin  sys  usr
+bin  dev   home  lib64  mnt    proc  run   srv   tmp  var
+
+[root@hostname01 /]# ls /bin
+[root@hostname01 /]# ls /etc
+[root@hostname01 /]# ls /usr
+bin  games  include  lib  lib64  libexec  local  sbin  share  src  tmp
+
+=====USING PIPES AND FILTERS=====
+
+1. [root@hostname01 /]# ls --help > lsdoc
+
+2. [root@hostname01 /]# cat lsdoc | less
+
+3. [root@hostname01 /]# head -4 lsdoc
+OUTPUT
+Usage: ls [OPTION]... [FILE]...
+List information about the FILEs (the current directory by default).
+Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
+
+4. [root@hostname01 /]# tail -7 lsdoc
+OUTPUT 
+ 0  if OK,
+ 1  if minor problems (e.g., cannot access subdirectory),
+ 2  if serious trouble (e.g., cannot access command-line argument).
+
+GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+Full documentation <https://www.gnu.org/software/coreutils/ls>
+or available locally via: info '(coreutils) ls invocation'
+
+5. [root@hostname01 /]# rm lsdoc
+rm: remove regular file 'lsdoc'? y
+
+6. DATA INSIDE FRIENDS 
+Madhu 6966456 09/07/68
+Jamil 2345215 08/09/67
+Ajay 5546785 01/04/66
+Mano 7820022 09/07/68
+David 8281292 09/09/60
+Simmi 7864563 12/12/70
+Navin 2224311 30/05/68
+
+[root@hostname01 /]# awk '{print $NF}' friends | sort | uniq | wc -l
+OUTPUT
+6
+
+7. [root@hostname01 /]# cat friends | grep "^Ma"
+OUTPUT
+Madhu 6966456 09/07/68
+Mano 7820022 09/07/68
+
+8.[root@hostname01 /]# cat friends | cut -d " "  -f1 | grep '^Ma.*(i|id)$'
+
+9. [root@hostname01 ~]# find $pwd
+.
+./.bash_logout
+./.bash_profile
+./.bashrc
+./.cshrc
+./.tcshrc
+./anaconda-ks.cfg
+./.cache
+./.cache/mesa_shader_cache
+./.cache/mesa_shader_cache/index
+./.cache/mesa_shader_cache/b5
+./.cache/mesa_shader_cache/b5/85f78032f2b48a8f18776e28be39603d5c5124
+./.cache/mesa_shader_cache/66
+./.cache/mesa_shader_cache/66/e87b90d2ef49af9ff75965465773b7e4c4e34d
+./.cache/mesa_shader_cache/ca
+./.cache/mesa_shader_cache/ca/7d6baed32d6a72519782748b787f5faad61192
+./.cache/mesa_shader_cache/ae
+./.cache/mesa_shader_cache/ae/4598a711700b783a0f698e674f883c9b236eed
+./.cache/mesa_shader_cache/f4
+./.cache/mesa_shader_cache/f4/e2f4d4c2204d91d937996e51bc14a00db824ce
+./.cache/mesa_shader_cache/f4/78fc634390363897dbf689fa53b34af4d84440
+./.cache/mesa_shader_cache/25
+./.cache/mesa_shader_cache/25/302f984eb8bc5ec380929622f64b64d768883c
+./.cache/mesa_shader_cache/ad
+./.cache/mesa_shader_cache/ad/570c28b8ae3c401124f4e6a33df774b69a17d3
+./.cache/mesa_shader_cache/23
+./.cache/mesa_shader_cache/23/9df3fcec405a97f593fd5de9b498b4c288c4f9
+./.cache/mesa_shader_cache/6e
+./.cache/mesa_shader_cache/6e/525caa61fd6669ec1bdc0ee3d67aa2a4497cf3
+./.cache/mesa_shader_cache/92
+./.cache/mesa_shader_cache/92/5a550149432fc7d96ae702bdd2518ac84cd5b4
+./.cache/mesa_shader_cache/43
+./.cache/mesa_shader_cache/43/807266a6c5710d4a9c1a7bd9172bcba09ba5a8
+./.cache/mesa_shader_cache/95
+./.cache/mesa_shader_cache/95/c8b014bd66673ea5a753956bfef2ff0c975038
+./.cache/mesa_shader_cache/81
+./.cache/mesa_shader_cache/81/43a13ac1067f2d6bcc25c8e506fda25ea9c45d
+./.cache/mesa_shader_cache/4b
+./.cache/mesa_shader_cache/4b/01d3d3a29e36a894368b4029000784f33e257b
+./.cache/mesa_shader_cache/cd
+./.cache/mesa_shader_cache/cd/317798f0b3c9e5e45654e695f566ba584c0b56
+./.cache/mesa_shader_cache/dd
+./.cache/mesa_shader_cache/dd/28f3b5e30c043f2ea8c5aac43c804942ee4249
+./.cache/mesa_shader_cache/dd/1ac89e1002a2186b1dbc3a71c52cc1386a6dc5
+./.cache/mesa_shader_cache/8f
+./.cache/mesa_shader_cache/8f/b7ca2c24334096b001858e92969fd6bd96dc89
+./.cache/mesa_shader_cache/46
+./.cache/mesa_shader_cache/46/9b0d6e9480ffdcee9481355c37eb0c5e86ec4d
+./.cache/mesa_shader_cache/0f
+./.cache/mesa_shader_cache/0f/4472993a3330811278ec8c94acb14c8d58293c
+./.cache/mesa_shader_cache/0f/40e87d86e82a476ee0a75351592138fa1f8dfd
+./.cache/mesa_shader_cache/af
+./.cache/mesa_shader_cache/af/ccac2da1bd770ab96d905f70380b994636d294
+./.cache/mesa_shader_cache/82
+./.cache/mesa_shader_cache/82/61c7a03a37676fb0483caecb204ad0904ddae3
+./.cache/mesa_shader_cache/01
+./.cache/mesa_shader_cache/01/33ba9b0141f78d299bbab088961c64b4780d95
+./.cache/mesa_shader_cache/c4
+./.cache/mesa_shader_cache/c4/fb6771a2bc84eefc71111235fee2b9a1c560d1
+./.cache/mesa_shader_cache/42
+./.cache/mesa_shader_cache/42/839312e5ce7f7ac43de7687bdc51cbdd3100fc
+./.cache/mesa_shader_cache/34
+./.cache/mesa_shader_cache/34/e8255bbb1b85f1d5fddf2f8cdef6bedcc5649f
+./.cache/mesa_shader_cache/fd
+./.cache/mesa_shader_cache/fd/cd62ed6bd7bb92b851c259cf33c5b53520d521
+./.cache/mesa_shader_cache/50
+./.cache/mesa_shader_cache/50/3f15416f91107642e47d62b8e61a56c338a516
+./.cache/mesa_shader_cache/f3
+./.cache/mesa_shader_cache/f3/372ec0f8baeb25de9c1167144e9fa895876400
+./.cache/mesa_shader_cache/44
+./.cache/mesa_shader_cache/44/ed089527b6efd097208940d466a22a9b1f8d40
+./.cache/mesa_shader_cache/d7
+./.cache/mesa_shader_cache/d7/d73310d6123171e63b577b969affbfca6f3d99
+./.cache/mesa_shader_cache/ff
+./.cache/mesa_shader_cache/ff/d582b5bbefa32ccdc5f5c7435d3a95272073ce
+./.cache/mesa_shader_cache/d5
+./.cache/mesa_shader_cache/d5/e74f1ec181133254eb2d41845b3718d194b270
+./.cache/mesa_shader_cache/b1
+./.cache/mesa_shader_cache/b1/efdaf8162440bf98a4c8a8b9c6336e36825180
+./.cache/mesa_shader_cache/21
+./.cache/mesa_shader_cache/21/24713667bcb951a735cfcb1a18f50f6298931b
+./.cache/mesa_shader_cache/49
+./.cache/mesa_shader_cache/49/bc56d06f89d533b6bb7e7cb3efaf5802b03702
+./.cache/mesa_shader_cache/f1
+./.cache/mesa_shader_cache/f1/38f785886674986e3ef7149475b13e797b0b75
+./.cache/mesa_shader_cache/f1/e20b1905d670717b4fe85189d6ea1e1a05cc78
+./.cache/mesa_shader_cache/e3
+./.cache/mesa_shader_cache/e3/35feb733f9b3443ce3e10dcf66e57c8436b240
+./.cache/mesa_shader_cache/e3/e41a9740f8be81e5fb517090729465fba34e21
+./.cache/mesa_shader_cache/fc
+./.cache/mesa_shader_cache/fc/97599660ea75199a56e436f3b29bf817567525
+./.cache/mesa_shader_cache/73
+./.cache/mesa_shader_cache/73/2175e1e78f56eecfec57f85ea7f5bf8a8fedd5
+./.cache/mesa_shader_cache/73/88e1e4ce698fafa8d002c7751610b8e42bab90
+./.cache/mesa_shader_cache/3c
+./.cache/mesa_shader_cache/3c/10e6f298025eda2af6878147fe8d1cdef81537
+./.cache/mesa_shader_cache/c7
+./.cache/mesa_shader_cache/c7/89ca066c49ef668263c7f17fc842714ee4d91e
+./.cache/mesa_shader_cache/04
+./.cache/mesa_shader_cache/04/d2450145b1d592466f44442d46be124588439e
+./.cache/mesa_shader_cache/3b
+./.cache/mesa_shader_cache/3b/cd42242938ed7f52f803852ab24b090e48e15f
+./.cache/mesa_shader_cache/8e
+./.cache/mesa_shader_cache/8e/baff6967cd45349cb6212365f1141276d46fb6
+./.cache/mesa_shader_cache/8b
+./.cache/mesa_shader_cache/8b/945edca35472ba6c3bf2dd14fe0f138cbea792
+./.cache/mesa_shader_cache/f0
+./.cache/mesa_shader_cache/f0/36aedfe9140cd9ebd36bea96f65146efb61e27
+./.cache/mesa_shader_cache/41
+./.cache/mesa_shader_cache/41/e0aef6d54118d6b0b40b7179ff03393fc9b221
+./.cache/mesa_shader_cache/d8
+./.cache/mesa_shader_cache/d8/af7ca2a49d92f5d68d62e0920636ab807452ca
+./.cache/mesa_shader_cache/6b
+./.cache/mesa_shader_cache/6b/98920132bab2fc9572576a73021a4d33199d8b
+./.cache/mesa_shader_cache/70
+./.cache/mesa_shader_cache/70/63e234fc4fefe6a35ef4963254ea558ddfbf00
+./.cache/mesa_shader_cache/02
+./.cache/mesa_shader_cache/02/4461f736fdabbaef00da92e8341ff92dade566
+./.cache/mesa_shader_cache/2c
+./.cache/mesa_shader_cache/2c/aa0009932b74b95c3cb171a5e29f39812733e5
+./.cache/mesa_shader_cache/9f
+./.cache/mesa_shader_cache/9f/5729816865fe702d480d42402ba15f78b62b24
+./.cache/mesa_shader_cache/83
+./.cache/mesa_shader_cache/83/364df92e857b1bcd5d068df7317a5078fea1d5
+./.cache/mesa_shader_cache/75
+./.cache/mesa_shader_cache/75/b0bf316a81c69e73787e1f7386e65a71f530fd
+./.cache/mesa_shader_cache/53
+./.cache/mesa_shader_cache/53/7ad72e11e1a141a713c8a4502f0527cf220440
+./.cache/mesa_shader_cache/1c
+./.cache/mesa_shader_cache/1c/b251f84d881d339ec2e0571aebdce73e33d7b8
+./.cache/mesa_shader_cache/e0
+./.cache/mesa_shader_cache/e0/a0d97313ada3c5bace88baa6faf4f666ca89c8
+./.cache/mesa_shader_cache/4a
+./.cache/mesa_shader_cache/4a/b010ff9e455eb794d80143fbd4606bce247f95
+./.cache/mesa_shader_cache/c9
+./.cache/mesa_shader_cache/c9/96f18399358ba3c3f3f7d3ad39ba3da5cdd9b9
+./.cache/mesa_shader_cache/39
+./.cache/mesa_shader_cache/39/e6daf33f4cded639a711f326a313f78e078bd1
+./.cache/mesa_shader_cache/bf
+./.cache/mesa_shader_cache/bf/4fdf8f75f7e5ee3a6278a32582fd9f79eb3c9e
+./.cache/mesa_shader_cache/9e
+./.cache/mesa_shader_cache/9e/ff62e9321cd9a9f8b294cf8f014106be54c564
+./.cache/mesa_shader_cache/65
+./.cache/mesa_shader_cache/65/f4c2667ca737a7ddb9c77a0cc96f659bfb866d
+./.cache/mesa_shader_cache/32
+./.cache/mesa_shader_cache/32/c7865e081040e2f633e52892d66191f60511c4
+./.cache/mesa_shader_cache/9c
+./.cache/mesa_shader_cache/9c/dfe50c50422e8b16f47587948ed84e73c6d66c
+./.cache/ibus
+./.cache/evolution
+./.cache/evolution/addressbook
+./.cache/evolution/addressbook/trash
+./.cache/evolution/calendar
+./.cache/evolution/calendar/trash
+./.cache/evolution/mail
+./.cache/evolution/mail/trash
+./.cache/evolution/memos
+./.cache/evolution/memos/trash
+./.cache/evolution/sources
+./.cache/evolution/sources/trash
+./.cache/evolution/tasks
+./.cache/evolution/tasks/trash
+./.cache/gstreamer-1.0
+./.cache/gstreamer-1.0/registry.x86_64.bin
+./.cache/gnome-software
+./.cache/gnome-software/appstream
+./.cache/gnome-software/appstream/components.xmlb
+./.cache/gnome-software/flatpak-system-default
+./.cache/gnome-software/flatpak-system-default/components.xmlb
+./.cache/gnome-software/flatpak-user-user
+./.cache/gnome-software/flatpak-user-user/components.xmlb
+./.cache/gnome-software/odrs
+./.cache/gnome-software/odrs/ratings.json
+./.cache/appstream
+./.bash_history
+./Desktop
+./Downloads
+./Templates
+./Public
+./Documents
+./Music
+./Pictures
+./Videos
+./.config
+./.config/user-dirs.dirs
+./.config/user-dirs.locale
+./.config/ibus
+./.config/ibus/bus
+./.config/ibus/bus/009f37d84e1d40d1b16d8b7e17653f73-unix-wayland-0
+./.config/dconf
+./.config/dconf/user
+./.config/evolution
+./.config/evolution/sources
+./.config/evolution/sources/system-proxy.source
+./.config/goa-1.0
+./.config/.gsd-keyboard.settings-ported
+./.config/gtk-3.0
+./.config/gtk-3.0/bookmarks
+./.config/gnome-initial-setup-done
+./.config/gnome-session
+./.config/gnome-session/saved-session
+./.local
+./.local/share
+./.local/share/gnome-shell
+./.local/share/gnome-shell/gnome-overrides-migrated
+./.local/share/evolution
+./.local/share/evolution/addressbook
+./.local/share/evolution/addressbook/trash
+./.local/share/evolution/addressbook/system
+./.local/share/evolution/addressbook/system/contacts.db
+./.local/share/evolution/addressbook/system/photos
+./.local/share/evolution/calendar
+./.local/share/evolution/calendar/trash
+./.local/share/evolution/calendar/system
+./.local/share/evolution/mail
+./.local/share/evolution/mail/trash
+./.local/share/evolution/memos
+./.local/share/evolution/memos/trash
+./.local/share/evolution/tasks
+./.local/share/evolution/tasks/trash
+./.local/share/evolution/tasks/system
+./.local/share/evolution/tasks/system/tasks.ics
+./.local/share/flatpak
+./.local/share/flatpak/db
+./.local/share/flatpak/repo
+./.local/share/flatpak/repo/config
+./.local/share/flatpak/repo/tmp
+./.local/share/flatpak/repo/tmp/cache
+./.local/share/flatpak/repo/extensions
+./.local/share/flatpak/repo/state
+./.local/share/flatpak/repo/refs
+./.local/share/flatpak/repo/refs/heads
+./.local/share/flatpak/repo/refs/mirrors
+./.local/share/flatpak/repo/refs/remotes
+./.local/share/flatpak/repo/objects
+./.local/share/flatpak/.changed
+./.local/share/applications
+./.local/share/sounds
+./.local/share/pki
+./.local/share/pki/nssdb
+./.local/share/icc
+./.local/share/gnome-settings-daemon
+./.local/share/gnome-settings-daemon/input-sources-converted
+./.local/share/gvfs-metadata
+./.local/share/gvfs-metadata/home
+./.local/share/gvfs-metadata/root
+./.local/share/gvfs-metadata/home-76782e74.log
+./.local/share/gvfs-metadata/root-1b38da50.log
+./.local/share/keyrings
+./.local/share/keyrings/login.keyring
+./.local/share/keyrings/user.keystore
+./.ssh
+./.xauthszuVde
+./.lesshst
+./temp1
+./temp1/sun
+./temp1/moon
+./temp1/temp2
+./temp1/temp2/temp1
+./temp1/temp2/temp1/sun
+./temp1/temp2/temp1/moon
+./temp1/temp3
+./temp1/temp3/temp1
+./temp1/temp3/temp1/sun
+./temp1/temp3/temp1/moon
+./temp1/temp3/temp2
+./temp1/temp3/temp2/temp1
+./temp1/temp3/temp2/temp1/sun
+./temp1/temp3/temp2/temp1/moon
+./friends
+./friends.txt
+./newfriend
+./newfriend.txt
+./users
+./users.txt
+./lsdoc
+./errorlog
+./errorlog.txt
+./.sum.sh.swp
+./.xauthBrj3jg
+./nam.sh
+./demofile
+./a.c
+./.xauth3ZueIr
+./name.sh
+./working_day.sh
+./.xauthhdTyix
+./starpattern.sh
+./kk.c
+./cron.txt
+./filecheck.sh
+./student.txt
+./.xauthNGl2uI
+./-s
+./.netware.txt.swp
+./.demofile.swp
+./chap1
+./nato
+./.viminfo
+./workingday.sh
+./network.txt
+./netware.txt
+./aa.c
+./myfile
+./cron1.txt
+./healthclub.sh
+./add.c
+./demo
+./demo/passwd
+./cron2.txt
+./systime.sh
+./tempdir
+./pattern.sh
+./students.txt
+./update.sh
+
+10. [root@hostname01 ~]# find -type d
+.
+./.cache
+./.cache/mesa_shader_cache
+./.cache/mesa_shader_cache/b5
+./.cache/mesa_shader_cache/66
+./.cache/mesa_shader_cache/ca
+./.cache/mesa_shader_cache/ae
+./.cache/mesa_shader_cache/f4
+./.cache/mesa_shader_cache/25
+./.cache/mesa_shader_cache/ad
+./.cache/mesa_shader_cache/23
+./.cache/mesa_shader_cache/6e
+./.cache/mesa_shader_cache/92
+./.cache/mesa_shader_cache/43
+./.cache/mesa_shader_cache/95
+./.cache/mesa_shader_cache/81
+./.cache/mesa_shader_cache/4b
+./.cache/mesa_shader_cache/cd
+./.cache/mesa_shader_cache/dd
+./.cache/mesa_shader_cache/8f
+./.cache/mesa_shader_cache/46
+./.cache/mesa_shader_cache/0f
+./.cache/mesa_shader_cache/af
+./.cache/mesa_shader_cache/82
+./.cache/mesa_shader_cache/01
+./.cache/mesa_shader_cache/c4
+./.cache/mesa_shader_cache/42
+./.cache/mesa_shader_cache/34
+./.cache/mesa_shader_cache/fd
+./.cache/mesa_shader_cache/50
+./.cache/mesa_shader_cache/f3
+./.cache/mesa_shader_cache/44
+./.cache/mesa_shader_cache/d7
+./.cache/mesa_shader_cache/ff
+./.cache/mesa_shader_cache/d5
+./.cache/mesa_shader_cache/b1
+./.cache/mesa_shader_cache/21
+./.cache/mesa_shader_cache/49
+./.cache/mesa_shader_cache/f1
+./.cache/mesa_shader_cache/e3
+./.cache/mesa_shader_cache/fc
+./.cache/mesa_shader_cache/73
+./.cache/mesa_shader_cache/3c
+./.cache/mesa_shader_cache/c7
+./.cache/mesa_shader_cache/04
+./.cache/mesa_shader_cache/3b
+./.cache/mesa_shader_cache/8e
+./.cache/mesa_shader_cache/8b
+./.cache/mesa_shader_cache/f0
+./.cache/mesa_shader_cache/41
+./.cache/mesa_shader_cache/d8
+./.cache/mesa_shader_cache/6b
+./.cache/mesa_shader_cache/70
+./.cache/mesa_shader_cache/02
+./.cache/mesa_shader_cache/2c
+./.cache/mesa_shader_cache/9f
+./.cache/mesa_shader_cache/83
+./.cache/mesa_shader_cache/75
+./.cache/mesa_shader_cache/53
+./.cache/mesa_shader_cache/1c
+./.cache/mesa_shader_cache/e0
+./.cache/mesa_shader_cache/4a
+./.cache/mesa_shader_cache/c9
+./.cache/mesa_shader_cache/39
+./.cache/mesa_shader_cache/bf
+./.cache/mesa_shader_cache/9e
+./.cache/mesa_shader_cache/65
+./.cache/mesa_shader_cache/32
+./.cache/mesa_shader_cache/9c
+./.cache/ibus
+./.cache/evolution
+./.cache/evolution/addressbook
+./.cache/evolution/addressbook/trash
+./.cache/evolution/calendar
+./.cache/evolution/calendar/trash
+./.cache/evolution/mail
+./.cache/evolution/mail/trash
+./.cache/evolution/memos
+./.cache/evolution/memos/trash
+./.cache/evolution/sources
+./.cache/evolution/sources/trash
+./.cache/evolution/tasks
+./.cache/evolution/tasks/trash
+./.cache/gstreamer-1.0
+./.cache/gnome-software
+./.cache/gnome-software/appstream
+./.cache/gnome-software/flatpak-system-default
+./.cache/gnome-software/flatpak-user-user
+./.cache/gnome-software/odrs
+./.cache/appstream
+./Desktop
+./Downloads
+./Templates
+./Public
+./Documents
+./Music
+./Pictures
+./Videos
+./.config
+./.config/ibus
+./.config/ibus/bus
+./.config/dconf
+./.config/evolution
+./.config/evolution/sources
+./.config/goa-1.0
+./.config/gtk-3.0
+./.config/gnome-session
+./.config/gnome-session/saved-session
+./.local
+./.local/share
+./.local/share/gnome-shell
+./.local/share/evolution
+./.local/share/evolution/addressbook
+./.local/share/evolution/addressbook/trash
+./.local/share/evolution/addressbook/system
+./.local/share/evolution/addressbook/system/photos
+./.local/share/evolution/calendar
+./.local/share/evolution/calendar/trash
+./.local/share/evolution/calendar/system
+./.local/share/evolution/mail
+./.local/share/evolution/mail/trash
+./.local/share/evolution/memos
+./.local/share/evolution/memos/trash
+./.local/share/evolution/tasks
+./.local/share/evolution/tasks/trash
+./.local/share/evolution/tasks/system
+./.local/share/flatpak
+./.local/share/flatpak/db
+./.local/share/flatpak/repo
+./.local/share/flatpak/repo/tmp
+./.local/share/flatpak/repo/tmp/cache
+./.local/share/flatpak/repo/extensions
+./.local/share/flatpak/repo/state
+./.local/share/flatpak/repo/refs
+./.local/share/flatpak/repo/refs/heads
+./.local/share/flatpak/repo/refs/mirrors
+./.local/share/flatpak/repo/refs/remotes
+./.local/share/flatpak/repo/objects
+./.local/share/applications
+./.local/share/sounds
+./.local/share/pki
+./.local/share/pki/nssdb
+./.local/share/icc
+./.local/share/gnome-settings-daemon
+./.local/share/gvfs-metadata
+./.local/share/keyrings
+./.ssh
+./temp1
+./temp1/sun
+./temp1/moon
+./temp1/temp2
+./temp1/temp2/temp1
+./temp1/temp2/temp1/sun
+./temp1/temp2/temp1/moon
+./temp1/temp3
+./temp1/temp3/temp1
+./temp1/temp3/temp1/sun
+./temp1/temp3/temp1/moon
+./temp1/temp3/temp2
+./temp1/temp3/temp2/temp1
+./temp1/temp3/temp2/temp1/sun
+./temp1/temp3/temp2/temp1/moon
+./demo
+./tempdir
+
+11. [root@hostname01 ~]# find $pwd -type f -name 'chap*'
+./chap1
+
+12. [root@hostname01 ~]# sort friends.txt
+Ajay 5546785 01/04/66
+David 8281292 09/09/60
+Jamil 2345215 08/09/67
+Madhu 6966456 09/07/68
+Mano 7820022 09/07/68
+Navin 2224311 30/05/68
+Simmi 7864563 12/12/70
+
+13. [root@hostname01 ~]# cat friends.txt | tr '[:lower:]' '[:upper:]'
+MADHU 6966456 09/07/68
+JAMIL 2345215 08/09/67
+AJAY 5546785 01/04/66
+MANO 7820022 09/07/68
+DAVID 8281292 09/09/60
+SIMMI 7864563 12/12/70
+NAVIN 2224311 30/05/68
+
+14. [root@hostname01 ~]# ls -l ~ > dir
+
+15. [root@hostname01 ~]# awk '{print $1, $9}' dir
+total 
+-rw-r--r--. aa.c
+-rwxr--r--. a.c
+-rwxr-xr-x. add.c
+-rw-------. anaconda-ks.cfg
+-rwxr--r--. chap1
+-rwxr-xr-x. cron1.txt
+-rw-r--r--. cron2.txt
+-rwxr-xr-x. cron.txt
+d-wx--x--x. demo
+-rw-rw----. demofile
+drwxr-xr-x. Desktop
+-rw-r--r--. dir
+drwxr-xr-x. Documents
+drwxr-xr-x. Downloads
+-rw-r--r--. errorlog
+-rw-r--r--. errorlog.txt
+-rwxr-xr-x. filecheck.sh
+-rw-r--r--. friends
+-rw-r--r--. friends.txt
+-rwxr-xr-x. healthclub.sh
+-rwxr--r--. kk.c
+-rw-r--r--. lsdoc
+drwxr-xr-x. Music
+-rwxr--r--. myfile
+-rwxr-xr-x. name.sh
+-rwxr-xr-x. nam.sh
+-rwxr--r--. nato
+-rw-r--r--. netware.txt
+-rw-r--r--. network.txt
+-rw-r--r--. newfriend
+-rw-r--r--. newfriend.txt
+-rwxr-xr-x. pattern.sh
+drwxr-xr-x. Pictures
+drwxr-xr-x. Public
+-rw-r--r--. -s
+-rwxr-xr-x. starpattern.sh
+-rwxr-xr-x. students.txt
+-rw-r--r--. student.txt
+-rwxr-xr-x. systime.sh
+drwxr-xr-x. temp1
+drwxr-xr-x. tempdir
+drwxr-xr-x. Templates
+-rwxr-xr-x. update.sh
+-rw-r--r--. users
+-rw-r--r--. users.txt
+drwxr-xr-x. Videos
+-rw-r--r--. working_day.sh
+-rwxr-xr-x. workingday.sh
+
+16. [root@hostname01 ~]# awk '{print $9}' dir > files
+
+17. [root@hostname01 ~]# awk '{print $1}' dir > perms
+
+18. [root@hostname01 ~]# awk '{print $5}' dir > sizes
+
+19. [root@hostname01 ~]# ls -l ~ | awk '{print $9,$5,$1}'
+  total
+aa.c 0 -rw-r--r--.
+a.c 0 -rwxr--r--.
+add.c 0 -rwxr-xr-x.
+anaconda-ks.cfg 828 -rw-------.
+chap1 0 -rwxr--r--.
+cron1.txt 2161 -rwxr-xr-x.
+cron2.txt 4316 -rw-r--r--.
+cron.txt 4316 -rwxr-xr-x.
+demo 20 d-wx--x--x.
+demofile 0 -rw-rw----.
+Desktop 6 drwxr-xr-x.
+dir 2514 -rw-r--r--.
+Documents 6 drwxr-xr-x.
+Downloads 6 drwxr-xr-x.
+errorlog 41 -rw-r--r--.
+errorlog.txt 41 -rw-r--r--.
+filecheck.sh 513 -rwxr-xr-x.
+files 441 -rw-r--r--.
+friends 0 -rw-r--r--.
+friends.txt 159 -rw-r--r--.
+healthclub.sh 177 -rwxr-xr-x.
+kk.c 0 -rwxr--r--.
+lsdoc 7744 -rw-r--r--.
+Music 6 drwxr-xr-x.
+myfile 0 -rwxr--r--.
+name.sh 142 -rwxr-xr-x.
+nam.sh 135 -rwxr-xr-x.
+nato 0 -rwxr--r--.
+netware.txt 356 -rw-r--r--.
+network.txt 349 -rw-r--r--.
+newfriend 0 -rw-r--r--.
+newfriend.txt 159 -rw-r--r--.
+pattern.sh 64 -rwxr-xr-x.
+perms 582 -rw-r--r--.
+Pictures 6 drwxr-xr-x.
+Public 6 drwxr-xr-x.
+-s 20347 -rw-r--r--.
+sizes 151 -rw-r--r--.
+starpattern.sh 61 -rwxr-xr-x.
+students.txt 69 -rwxr-xr-x.
+student.txt 19 -rw-r--r--.
+systime.sh 244 -rwxr-xr-x.
+temp1 55 drwxr-xr-x.
+tempdir 6 drwxr-xr-x.
+Templates 6 drwxr-xr-x.
+update.sh 371 -rwxr-xr-x.
+users 259 -rw-r--r--.
+users.txt 159 -rw-r--r--.
+Videos 6 drwxr-xr-x.
+working_day.sh 103 -rw-r--r--.
+workingday.sh 111 -rwxr-xr-x.
+
+20. [root@hostname01 ~]# who | wc -l
+OUTPUT
+2
+
+21. [root@hostname01 ~]# ls -l ~ | sort -k5 -n | head -n 1
+-rw-r--r--. 1 root root     0 Jan 27 22:08 friends
+
+[root@hostname01 ~]# ls -l ~ | sort -k5 -n | head -n 1 | awk '{print $5}'
+0
+
+[root@hostname01 ~]# ls -l ~ | sort -k5 -n | head -n 1 | awk '{print $9}'
+friends
+
+22. [root@hostname01 ~]# cat friends.txt | wc -l
+OUTPUT
+7
+
+23:
+[root@hostname01 ~]# ./emp.lst
+1001|John|Manager|Tech|01/03/2002|50000
+1002|Sam|Assistant|Marketing|20/01/1990|30000
+1003|Jane|Manager|Tech|17/10/2001|60000
+1004|Josh|Clerk|Human res|11/04/2000|20000
+
+[root@hostname01 ~]# ./dept.lst
+HR|Human res|1001
+RE|Research|1002
+MK|Marketing|1003
+TE|Tech|1234
+
+[root@hostname01 ~]# ./desg.lst
+MG|Manager
+AS|Assistant
+CL|Clerk
+
+1. 
+[root@hostname01 ~]# awk '{print length}' emp.lst
+46
+52
+46
+49
+0
+[root@hostname01 ~]# awk '{print length}' dept.lst
+24
+23
+24
+19
+0
+[root@hostname01 ~]# awk '{print length}' desg.lst
+17
+19
+15
+0
+
+2. [root@hostname01 ~]# ./emp.lst | cut -d '|' -f5,6 | tail -n 1
+11/04/2000|20000
+
+3. [root@hostname01 ~]# ./emp.lst | cut -d '|' -f2,3 > cfile1
+[root@hostname01 ~]# cat cfile1
+John|Manager
+Sam|Assistant
+Jane|Manager
+Josh|Clerk
+
+4. [root@hostname01 ~]# ./emp.lst | cut -d '|' -f1,4,5,6 > cfile2
+[root@hostname01 ~]# cat cfile2
+1001|Tech|01/03/2002|50000
+1002|Marketing|20/01/1990|30000
+1003|Tech|17/10/2001|60000
+1004|Human res|11/04/2000|20000
+
+
+5. [root@hostname01 ~]# paste -d '|' cfile1 cfile2 
+John|Manager|1001|Tech|01/03/2002|50000
+Sam|Assistant|1002|Marketing|20/01/1990|30000
+Jane|Manager|1003|Tech|17/10/2001|60000
+Josh|Clerk|1004|Human res|11/04/2000|20000
+
+6. [root@hostname01 ~]# sort -t '|'  -r -k2 emp.lst
+echo "1002|Sam|Assistant|Marketing|20/01/1990|30000"
+echo "1004|Josh|Clerk|Human res|11/04/2000|20000"
+echo "1001|John|Manager|Tech|01/03/2002|50000"
+echo "1003|Jane|Manager|Tech|17/10/2001|60000"
+
+7. [root@hostname01 ~]# sort -t '|'  -k6 emp.lst > srtf
+[root@hostname01 ~]# cat srtf
+
+echo "1004|Josh|Clerk|Human res|11/04/2000|20000"
+echo "1002|Sam|Assistant|Marketing|20/01/1990|30000"
+echo "1001|John|Manager|Tech|01/03/2002|50000"
+echo "1003|Jane|Manager|Tech|17/10/2001|60000"
+
+8. [root@hostname01 ~]# sort -t '|'  -k3 -k2 emp.lst
+
+echo "1002|Sam|Assistant|Marketing|20/01/1990|30000"
+echo "1004|Josh|Clerk|Human res|11/04/2000|20000"
+echo "1001|John|Manager|Tech|01/03/2002|50000"
+echo "1003|Jane|Manager|Tech|17/10/2001|60000"
+
+9. [root@hostname01 ~]# sort -t '|'  -k5  emp.lst
+
+echo "1001|John|Manager|Tech|01/03/2002|50000"
+echo "1004|Josh|Clerk|Human res|11/04/2000|20000"
+echo "1003|Jane|Manager|Tech|17/10/2001|60000"
+echo "1002|Sam|Assistant|Marketing|20/01/1990|30000"
+
+10. [root@hostname01 ~]# cut -d '|' -f3 emp.lst | sort | uniq
+
+Assistant
+Clerk
+Manager
+
+11. [root@hostname01 ~]# cut -d '|' -f3 emp.lst | sort | uniq -u
+
+Assistant
+Clerk
+
+12. [root@hostname01 ~]# cut -d '|' -f3 emp.lst | sort | uniq -c
+      1 
+      1 Assistant
+      1 Clerk
+      2 Manager
+
+13. [root@hostname01 ~]# cut -d '|' -f5 emp.lst | cut -d '/' -f3 | sort | uniq -c
+      1 
+      1 1990
+      1 2000
+      1 2001
+      1 2002
+14. [root@hostname01 ~]# ./desg.lst | nl -v 100 -i5
+   100	MG|Manager
+   105	AS|Assistant
+   110	CL|Clerk
+
+[root@hostname01 ~]# ./emp.lst | nl -v 100 -i5
+   100	1001|John|Manager|Tech|01/03/2002|50000
+   105	1002|Sam|Assistant|Marketing|20/01/1990|30000
+   110	1003|Jane|Manager|Tech|17/10/2001|60000
+   115	1004|Josh|Clerk|Human res|11/04/2000|20000
+
+24: cat mumbai
+1001|Manu Sharma|Manager|Tech|01/03/2002|50000
+1002|Seema Sharma|Assistant|Marketing|20/01/1990|30000
+1003|Sanjay|S.E|Admin|17/10/2001|60000
+1004|Josh|Clerk|HR|11/04/2000|20000
+
+[root@hostname01 ~]# cat pune
+1007|Manu Chaturvedi|Manager|Tech|01/03/2002|50000
+2402|Aditya Trivedi|Assistant|Recr|20/01/1990|30000
+2003|Sanjay|S.E|H/W|17/10/2001|60000
+1004|Jay Dwivedi|S.E|HR|11/04/2000|89000
+                 
+[root@hostname01 ~]# cat ttc
+1007|Manish|Manager|HR|01/03/2002|59000
+2403|Jane|Assistant|Recr|20/01/1990|30700
+2009|Sam|S.E|H/W|17/10/2001|65000
+1231|Adi Dutt|S.E|HR|11/04/2000|40000
+
+1. [root@hostname01 ~]# ./mumbai | grep "Manu Sharma"
+1001|Manu Sharma|Manager|Tech|01/03/2002|50000
+
+2. [root@hostname01 ~]# ./mumbai | grep "Manu Sharma" | cut -d '|' -f1,4
+1001|Tech
+
+3. [root@hostname01 ~]# grep -h "Manager" mumbai pune ttc
+1001|Manu Sharma|Manager|Tech|01/03/2002|50000
+1007|Manu Chaturvedi|Manager|Tech|01/03/2002|50000
+1007|Manish|Manager|HR|01/03/2002|59000
+
+4. [root@hostname01 ~]# grep "S.E" pune | wc -l
+2
+[root@hostname01 ~]# grep "S.E" mumbai | wc -l
+1
+[root@hostname01 ~]# grep "S.E" ttc | wc -l
+2
+
+5. [root@hostname01 ~]# cat pune | awk -F '|' '$4=="H/W" {print NR, $2}' 
+OUTPUT
+3 Sanjay
+
+6. [root@hostname01 ~]# cat mumbai | grep -v "HR" > nonhr
+[root@hostname01 ~]# cat nonhr
+OUTPUT
+1001|Manu Sharma|Manager|Tech|01/03/2002|50000
+1002|Seema Sharma|Assistant|Marketing|20/01/1990|30000
+1003|Sanjay|S.E|Admin|17/10/2001|60000 
+
+8. [root@hostname01 ~]# grep -l "Seema Sharma" *
+OUTPUT
+mumbai
+nonhr
+
+9. [root@hostname01 ~]# grep -n "Saxena" mumbai
+5:2343|Sia Saxena|Clerk|Admin|11/12/1990|3000
+
+[root@hostname01 ~]# grep -n "Saksena" mumbai
+6:2145|J Saksena|Assistant|Tech|20/11/2000|60000
+
+10. [root@hostname01 ~]# awk -F '|' '$3=="Manager" && $6 >=50000 && $6 <= 99999' pune | wc -l
+OUTPUT
+1
+
+11. [root@hostname01 ~]# awk -F '|' '$1 >=2000 && $1 <= 2999 {print $2}' pune 
+OUTPUT FOR PUNE----->
+Aditya Trivedi
+Sanjay
+
+[root@hostname01 ~]# awk -F '|' '$1 >=2000 && $1 <= 2999 {print $2}' pune mumbai ttc
+OUTPUT FOR ALL OFFICES----->
+Aditya Trivedi
+Sanjay
+Sia Saxena
+J Saksena
+Jane
+Sam
+
+12. [root@hostname01 ~]# awk -F '|' -v month="$(date +%m)" '$5 ~ "/" month "/" {print $2}' pune
+OUTPUT
+Aditya Trivedi
+
+13. [root@hostname01 ~]# cat pune mumbai ttc | egrep -v "HR|Admin"
+
+OUTPUT
+
+1007|Manu Chaturvedi|Manager|Tech|01/03/2002|50000
+2402|Aditya Trivedi|Assistant|Recr|20/01/1990|30000
+2003|Sanjay|S.E|H/W|17/10/2001|60000
+                                           
+1001|Manu Sharma|Manager|Tech|01/03/2002|50000
+1002|Seema Sharma|Assistant|Marketing|20/01/1990|30000
+2145|J Saksena|Assistant|Tech|20/11/2000|60000
+
+2403|Jane|Assistant|Recr|20/01/1990|30700
+2009|Sam|S.E|H/W|17/10/2001|65000
+
+
+14. [root@hostname01 ~]# cat pune | egrep "Dwivedi|Trivedi|Chaturvedi"
+1007|Manu Chaturvedi|Manager|Tech|01/03/2002|50000
+2402|Aditya Trivedi|Assistant|Recr|20/01/1990|30000
+1004|Jay Dwivedi|S.E|HR|11/04/2000|89000
+
+15. [root@hostname01 ~]# egrep "HR|Admin|Recr" pune mumbai ttc | sort -t '|' -r -k4
+
+OUTPUT
+
+ttc:2403|Jane|Assistant|Recr|20/01/1990|30700
+pune:2402|Aditya Trivedi|Assistant|Recr|20/01/1990|30000
+pune:1004|Jay Dwivedi|S.E|HR|11/04/2000|89000
+ttc:1231|Adi Dutt|S.E|HR|11/04/2000|40000
+mumbai:1004|Josh|Clerk|HR|11/04/2000|20000
+ttc:1007|Manish|Manager|HR|01/03/2002|59000
+mumbai:1003|Sanjay|S.E|Admin|17/10/2001|60000
+mumbai:2343|Sia Saxena|Clerk|Admin|11/12/1990|3000
+
+
+
+
+
+ 
+
+
+
+
+
