@@ -836,6 +836,8 @@ Clerk
 1002|Seema Sharma|Assistant|Marketing|20/01/1990|30000
 1003|Sanjay|S.E|Admin|17/10/2001|60000
 1004|Josh|Clerk|HR|11/04/2000|20000
+2343|Sia Saxena|Clerk|Admin|11/12/1990|3000
+2145|J Saksena|Assistant|Tech|20/11/2000|60000
 
 [root@hostname01 ~]# cat pune
 1007|Manu Chaturvedi|Manager|Tech|01/03/2002|50000
