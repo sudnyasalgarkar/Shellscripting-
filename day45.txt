@@ -1,0 +1,517 @@
+1. vim pattern.sh
+star=" "
+for i in $(seq 1 4)
+do star+="*"
+        echo "$star"
+done
+
+chmod +x pattern.sh
+
+./pattern.sh
+OUTPUT
+*
+**
+***
+****
+
+2. vim name.sh
+read -p "Enter first name " fname
+read -p "Enter middle name " mname
+read -p "Enter last name " lname
+
+echo "Welcome $fanme $mname $lname! "
+
+chmod +x name.sh
+
+./name.sh
+
+OUTPUT
+Enter first name Sudnya
+Enter middle name Rajkumar
+Enter last name Salgarkar
+Welcome  Rajkumar Salgarkar!
+
+3. [root@hostname01 ~]# vim filesize.sh
+a=$(ls)
+
+min=10000
+max=0
+minf=""
+maxf=""
+
+for i in $a
+do
+        size=$(ls -l "$i" | awk '{print $5}')
+        echo "$i - $size"
+
+        if [[ ! "$size" =~ ^[0-9]+$ ]]
+        then continue
+        fi
+if [ "$size" -lt $min ] && [ "$size" -gt 0 ]
+        then min=$size
+                minf=$i
+        fi
+
+        if [ "$size" -gt $max ]
+        then max=$size
+                maxf=$i
+        fi
+done
+echo "File of maximum size : $maxf"
+echo "File of minimum size : $minf"
+
+OUTPUT---->
+[root@hostname01 ~]# ./filesize.sh
+aa.c - 0
+a.c - 0
+add.c - 0
+anaconda-ks.cfg - 828
+cfile1 - 51
+cfile2 - 118
+chap1 - 0
+cron1.txt - 2161
+cron2.txt - 4316
+cron.txt - 4316
+demo - 
+2098
+demofile - 0
+dept.lst - 95
+desg.lst - 55
+Desktop - 
+dir - 2514
+Documents - 
+Downloads - 
+emp.lst - 198
+errorlog - 41
+errorlog.txt - 41
+filecheck.sh - 513
+files - 441
+filesize - 0
+filesize.sh - 378
+friends - 0
+friends.txt - 159
+healthclub.sh - 177
+kk.c - 0
+lsdoc - 7744
+mumbai - 269
+Music - 
+myfile - 0
+name.sh - 142
+nam.sh - 135
+nato - 0
+netware.txt - 356
+network.txt - 349
+newfriend - 0
+newfriend.txt - 159
+nonhr - 141
+pattern.sh - 64
+perms - 582
+Pictures - 
+Public - 
+pune - 228
+-s - 
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+root
+serverload.txt - 0
+sizes - 151
+srtf - 198
+starpattern.sh - 61
+student.dat - 184
+students.txt - 69
+student.txt - 19
+systime.sh - 244
+temp1 - 
+6
+6
+19
+32
+tempdir - 
+Templates - 
+ttc - 154
+update.sh - 371
+users - 259
+users.txt - 159
+Videos - 
+working_day.sh - 103
+workingday.sh - 111
+File of maximum size : lsdoc
+File of minimum size : student.txt
+
+4. vim workingday.sh
+if [ $(date +%u) -ge 1 ] && [ $(date +%u) -le 5 ]
+then 
+        echo "WORKING DAY"
+else
+        echo "NON WORKING DAY!!"
+fi
+
+chmod +x workingday.sh
+
+./workingday.sh    (Tuesday today)
+
+OUTPUT
+WORKING DAY
+
+5. vim healthclub.sh
+read -p "Enter your weight: " weight
+
+if [ $weight -ge 30 ]&&[ $weight -le 250 ]
+then
+        echo "Member accepted, weight within range!"
+else
+        echo "Sorry! Weight out of range"
+fi
+
+vim healthclub.sh
+
+./healthclub.sh
+OUTPUT
+Enter your weight: 42
+Member accepted, weight within range!
+
+./healthclub.sh
+OUTPUT
+Enter your weight: 256
+Sorry! Weight out of range
+
+6. vim systime.sh
+time=$(date +%H)
+if [ $time -ge 5 ] && [ $time -lt 12 ]
+then echo "Good morning"
+elif [ $time -ge 12 ] && [ $time -lt 17 ]
+then echo "Good Afternoon"
+elif [ $time -ge 17 ] && [ $time -lt 21 ]
+then echo "Good evening"
+else echo "Good night"
+fi
+
+[root@hostname01 ~]# chmod +x systime.sh
+
+./systime.sh   
+OUTPUT        (time when code was run : 5:23pm)
+Good evening
+
+7. cat students.txt
+1:John:23:45:76
+2:Sam:65:43:54
+3:Josh:87:56:32
+
+vim updatestudents.sh
+----->
+read -p "Enter rollno " rollno
+record=$(grep "^$rollno:" students.txt)
+
+if [ -z "$record" ]
+then
+        echo "Roll no not found"
+else
+        echo "current record: $record"
+        read -p "Enter new name " newname
+        read -p "Enter marks for sub1 " marks1
+        read -p "Enter marks for sub2 " marks2
+        read -p "Enter marks for sub3 " marks3
+
+        sed -i "s/^$rollno:.*/$rollno:$newname:$marks1:$marks2:$marks3/" students.txt
+        echo "Record for Roll number $rollno updated"
+        updated=$(grep "^$rollno:" students.txt)
+        echo "$updated"
+fi
+
+[root@hostname01 ~]# ./updatestudents.sh
+Enter rollno 2
+current record: 2:Sam:65:43:54
+Enter new name Sudnya
+Enter marks for sub1 48
+Enter marks for sub2 34
+Enter marks for sub3 65
+Record for Roll number 2 updated
+2:Sudnya:48:34:65
+
+[root@hostname01 ~]# ./updatestudents.sh
+Enter rollno 7
+Roll no not found
+
+8. [root@hostname01 ~]# ./updatestudents.sh 3
+current record: 3:Josh:87:56:32
+Enter new name Jane
+Enter marks for sub1 32
+Enter marks for sub2 65
+Enter marks for sub3 89
+Record for Roll number 3 updated
+3:Jane:32:65:89
+
+9. vim updatestudents.sh
+ 
+rollno=$1
+record=$(grep "^$rollno:" students.txt)
+
+if [ -z "$record" ]
+then
+        echo "Roll no not found"
+else
+        echo "current record: $record"
+        read -p "Delete record for roll number $rollno?" deleterec
+
+        if [ $deleterec == "yes" ]
+        then sed i "/^$rollno:/d" students.txt
+                echo "Record deleted"
+        fi
+fi
+----->
+[root@hostname01 ~]# ./updatestudents.sh 1
+current record: 1:John:23:45:76
+Delete record for roll number 1?yes
+Record deleted
+
+10. vim filecheck.sh
+
+if test $# -ne 1
+then echo "please provide only one argument"
+fi
+
+if [ -e "$1" ]
+then if [ -f "$1" ]
+then echo "$1 is a regular file"
+elif [ -d "$1" ]
+then echo "$1 is a directory"
+        elif [ -L "$1" ]
+then echo "$1 is a symbolic link"
+        elif [ -c "$1" ]
+then echo "$1 is a character device file"
+        elif [ -b "$1" ]
+then echo "$1 is a block device file"
+        elif [ -p "$1" ]
+then echo "$1 is a named pipe"
+        elif [ -s "$1" ]
+then echo "$1 is a socket"
+else
+        echo "$1 type unknown"
+fi
+else
+       echo "ERROR! $1 not found!"
+fi
+
+chmod +x filecheck.sh
+
+./filecheck.sh pattern.sh
+OUTPUT
+pattern.sh is a regular file
+
+./filecheck.sh pattern.sh friend.txt
+OUTPUT
+please provide only one argument
+
+./filecheck.sh tempdir
+OUTPUT
+ERROR! tempdir not found!
+
+./filecheck.sh systime.sh
+OUTPUT
+systime.sh is a regular file
+
+mkdir tempdir
+./filecheck.sh tempdir
+OUTPUT
+tempdir is a directory
+
+11. 
+a. 
+[root@hostname01 ~]# vim updatestudents.sh
+
+read -p "Enter roll number " rollno
+read -p "Enter name " newname
+read -p "Enter marks for Hindi " marks_hindi
+read -p "Enter marks for Maths " marks_maths
+read -p "Enter marks for Physics " marks_physics
+
+record=$(grep "^$rollno:" students.txt)
+
+if [ ! -z "$record" ]
+then
+
+        echo "$rollno:$newname:$marks_hindi:$marks_maths:$marks_physics Roll Number Exists" > log1
+        echo "Roll number exists"
+fi
+
+[root@hostname01 ~]# ./updatestudents.sh 
+---->
+Enter roll number 2
+Enter name Aditya
+Enter marks for Hindi 56
+Enter marks for Maths 45
+Enter marks for Physics 34
+Roll number exists
+
+[root@hostname01 ~]# cat log1
+2:Aditya:56:45:34 Roll Number Exists
+
+b. vim updatestudents.sh
+
+read -p "Enter roll number " rollno
+read -p "Enter name " newname
+read -p "Enter marks for Hindi " marks_hindi
+read -p "Enter marks for Maths " marks_maths
+read -p "Enter marks for Physics " marks_physics
+
+record=$(grep "^$rollno:" students.txt)
+
+if [ ! -z "$record" ]
+then
+
+        echo "$rollno:$newname:$marks_hindi:$marks_maths:$marks_physics Roll Number Exists" > log1
+        echo "Roll number exists"
+fi
+
+if [[ $marks_hindi || $marks_maths || $marks_physics -lt 1 && $marks_hindi || $marks_maths || $marks_physics -gt 99 ]]
+then echo "$rollno:$newname:$marks_hindi:$marks_maths:$marks_physics Marks out of range!" > log1
+fi
+ 
+[root@hostname01 ~]# ./updatestudents.sh
+----> 
+Enter roll number 7
+Enter name Sanjay
+Enter marks for Hindi 0
+Enter marks for Maths 101
+Enter marks for Physics 100
+
+[root@hostname01 ~]# cat log1
+7:Sanjay:0:101:100 Marks out of range!
+
+c. vim updatestudents.sh
+
+total=$((marks_hindi+marks_maths+marks_physics))
+percentage=$((total/3))
+
+if [ $percentage -gt 80 ]
+then grade="A"
+elif [ $percentage -gt 70 ]
+then grade="B"
+elif [ $percentage -gt 60 ]
+then grade="C"
+elif [ $percentage -gt  50 ]
+then grade="D"
+else
+        grade="F"
+fi
+
+echo "Data for $newname : "
+echo "Total : $total"
+echo "Percentage : $percentage"
+echo "Grade : $grade"
+
+---->
+[root@hostname01 ~]# ./updatestudents.sh 
+Enter roll number 1
+Enter name Sanjay
+Enter marks for Hindi 89
+Enter marks for Maths 92
+Enter marks for Physics 58
+Data for Sanjay : 
+Total : 239
+Percentage : 79
+Grade : B
+
+
+
+
+
